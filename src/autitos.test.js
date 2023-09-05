@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos } from "./autitos.js";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas } from "./autitos.js";
 
 describe("Mostrar", () => {
   /*it("deberia mostrar posicion inicial x, y, orientacion", () => {
@@ -41,5 +41,33 @@ describe("Mostrar", () => {
     const resultado = mostrar_comandos(cadena);
     expect(resultado).toEqual(null);
   });
+  it("debería devolver las coordenadas por que tienen una coma como separador yson positivos", () => {
+    const coordenadas = "2,2/3,2 N/IAIAIF";
+    const resultado = validarCoordenadas(coordenadas);
+    expect(resultado).toBe(coordenadas);
+  });
+  it("debería devolver null, las coordenadas no tienen una coma como separador", () => {
+    const coordenadas = "22/3,2 N/IAIAIF";
+    const resultado = validarCoordenadas(coordenadas);
+    expect(resultado).toBe(false);
+  });
+  it("debería devolver false si las coordenadas no tienen una coma como separador", () => {
+    const coordenadas = "2.2/3,2 N/IAIAIF";
+    const resultado = validarCoordenadas(coordenadas);
+    expect(resultado).toBe(false);
+  });
+
+  it("debería devolver false si las coordenadas contienen letras", () => {
+    const coordenadas = "abc,def/3,2 N/IAIAIF";
+    const resultado = validarCoordenadas(coordenadas);
+    expect(resultado).toBe(false);
+  });
+
+  it("debería devolver false si las coordenadas no son números enteros positivos", () => {
+    const coordenadas = "-1,2/3,2 N/IAIAIF";
+    const resultado = validarCoordenadas(coordenadas);
+    expect(resultado).toBe(false);
+  });
+
 });
 

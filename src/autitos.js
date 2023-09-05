@@ -40,3 +40,12 @@ export function mostrar_comandos(cadena)
      return null;
   }
 }
+export function validarCoordenadas(coordenadas) {
+  const coordenadasIniciales = coordenadas.split("/")[0];
+  const [x, y] = coordenadasIniciales.split(",");
+  if (coordenadas.includes(",") && Number.isInteger(parseInt(x)) && Number.isInteger(parseInt(y)) && parseInt(x) >= 0 && parseInt(y) >= 0) {
+ 
+    return coordenadas;
+  }
+  return false;
+}
