@@ -11,27 +11,27 @@ form.addEventListener("submit", (event) => {
 
   const cadenaEntrada = first.value.trim();
 
-  const resultado = mostrar_posiIni(cadenaEntrada);
-  const resultado3 = validarCoordenadas(cadenaEntrada);
-  const resultado2 = mostrar_comandos(cadenaEntrada);
-  const resultado4 = validarFormatoCadena(cadenaEntrada);
+  const Posi_Final = mostrar_posiIni(cadenaEntrada);
+  const Validar_Coordenada = validarCoordenadas(cadenaEntrada);
+  const Comandos = mostrar_comandos(cadenaEntrada);
+  const Validar_Cadenaa = validarFormatoCadena(cadenaEntrada);
   const superficie=CoordenadasSuperficie(cadenaEntrada);
-  const posicionFinal= ejecutarComandos(resultado2,resultado,superficie);
-  if(resultado4!=false)
+  const posicionFinal= ejecutarComandos(Comandos,Posi_Final,superficie);
+  if(Validar_Cadenaa!=false)
   {
-    if (resultado) {
-      div.innerHTML = `<p>Posicion Inicial : ${resultado.x},${resultado.y} ${resultado.orientacion}</p>`;
+    if (Posi_Final) {
+      div.innerHTML = `<p>Posicion Inicial : ${Posi_Final.x},${Posi_Final.y} ${Posi_Final.orientacion}</p>`;
   
     } else {
       div.innerHTML = "<p>Formato de entrada de la Posicion Inicial incorrecto o orientación inválida.</p>";
     }
-    if (resultado2) {
+    if (Comandos) {
       div2.innerHTML = "<p>Comandos: "+ mostrar_comandos(cadenaEntrada)+"</p>";
   
     } else {
       div2.innerHTML = "<p>Formato de entrada de los Comandos incorrecto o orientación inválida.</p>";
     }
-    if (resultado3!=false) {
+    if (Validar_Coordenada!=false) {
       div3.innerHTML = "<p></p>";
   
     } else {
