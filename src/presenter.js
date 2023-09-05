@@ -7,7 +7,14 @@ const div = document.querySelector("#resultado-div");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const firstNumber = first.value;
+  const cadenaEntrada = first.value.trim();
 
-  div.innerHTML = "<p>" +"Posicion Inicial: "+ mostrar(firstNumber) + "</p>";
+  const resultado = mostrar(cadenaEntrada);
+
+  if (resultado) {
+    div.innerHTML = `<p>Posicion Inicial : ${resultado.x},${resultado.y} ${resultado.orientacion}</p>`;
+
+  } else {
+    div.innerHTML = "<p>Formato de entrada incorrecto o orientación inválida.</p>";
+  }
 });
