@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena } from "./autitos.js";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos } from "./autitos.js";
 
 describe("Mostrar", () => {
   /*it("deberia mostrar posicion inicial x, y, orientacion", () => {
@@ -78,6 +78,19 @@ describe("Mostrar", () => {
     const cadena1 = "5,5/1,2N";
     const resultado1 = validarFormatoCadena(cadena1);
     expect(resultado1).toBe(false);
+  });
+  it("debería girar a la izquierda correctamente", () => {
+    const cadenaComandos = "III"; 
+    const posicionInicial = { x: 1, y: 2, orientacion: 'N' };
+    const posicionFinal = ejecutarComandos(cadenaComandos, posicionInicial);
+    expect(posicionFinal).toEqual({ x: 1, y: 2, orientacion: 'E' });
+  });
+  it("debería girar a la izquierda correctamente con la cadena", () => {
+    const cadena = "5,5/1,2 N/III"; 
+    const comandos=mostrar_comandos(cadena);
+    const posicionInicial = mostrar_posiIni(cadena);
+    const posicionFinal = ejecutarComandos(comandos, posicionInicial);
+    expect(posicionFinal).toEqual({ x: 1, y: 2, orientacion: 'E' });
   });
 });
 

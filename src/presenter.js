@@ -1,10 +1,11 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena } from "./autitos";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos } from "./autitos";
 
 const first = document.querySelector("#primer-numero");
 const form = document.querySelector("#comandos-form");
 const div = document.querySelector("#resultado-div");
 const div2 = document.querySelector("#resultado2-div");
 const div3 = document.querySelector("#resultado3-div");
+const div4 = document.querySelector("#resultado4-div");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -14,6 +15,7 @@ form.addEventListener("submit", (event) => {
   const resultado3 = validarCoordenadas(cadenaEntrada);
   const resultado2 = mostrar_comandos(cadenaEntrada);
   const resultado4 = validarFormatoCadena(cadenaEntrada);
+  const posicionFinal= ejecutarComandos(resultado2,resultado);
   if(resultado4!=false)
   {
     if (resultado) {
@@ -34,10 +36,11 @@ form.addEventListener("submit", (event) => {
     } else {
       div3.innerHTML = "<p>Formato de entrada de la Superficie incorrecto o orientación inválida.</p>";
     }
+    div4.innerHTML = `<p>Posicion Final : ${posicionFinal.x},${posicionFinal.y} ${posicionFinal.orientacion}</p>`;
   }
   else{
     div3.innerHTML = "<p>Formato de entrada de la Cadena incorrecto o orientación inválida.</p>";
   }
-
+  
   
 });

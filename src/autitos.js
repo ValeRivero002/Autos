@@ -60,3 +60,36 @@ export function validarFormatoCadena(cadena) {
     return false;
   }
 }
+export function ejecutarComandos(cadenaComandos, posicionInicial) {
+  let x = posicionInicial.x;
+  let y = posicionInicial.y;
+  let orientacion = posicionInicial.orientacion;
+
+  // Recorre cada carácter de la cadena de comandos
+  for (const comando of cadenaComandos) {
+    switch (comando) {
+      case 'I':
+      
+        switch (orientacion) {
+          case 'N':
+            orientacion = 'O';
+            break;
+          case 'O':
+            orientacion = 'S';
+            break;
+          case 'S':
+            orientacion = 'E';
+            break;
+          case 'E':
+            orientacion = 'N';
+            break;
+        }
+        break;
+      default:
+        
+        break;
+    }
+  }
+
+  return { x, y, orientacion };
+}
