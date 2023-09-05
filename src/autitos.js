@@ -101,6 +101,22 @@ export function ejecutarComandos(cadenaComandos, posicionInicial) {
               break;
           }
           break;
+          case 'A':
+        switch (orientacion) {
+          case 'N':
+            y++;
+            break;
+          case 'E':
+            x++;
+            break;
+          case 'S':
+            y--;
+            break;
+          case 'O':
+            x--;
+            break;
+        }
+        break;
       default:
         
         break;

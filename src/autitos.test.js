@@ -105,5 +105,18 @@ describe("Mostrar", () => {
     const posicionFinal = ejecutarComandos(comandos, posicionInicial);
     expect(posicionFinal).toEqual({ x: 1, y: 2, orientacion: 'O' });
   });
+  it("debería avanzar correctamente varias veces hacia el norte", () => {
+    const cadenaComandos = "AAAA"; 
+    const posicionInicial = { x: 1, y: 2, orientacion: 'N' };
+    const posicionFinal = ejecutarComandos(cadenaComandos, posicionInicial);
+    expect(posicionFinal).toEqual({ x: 1, y: 6, orientacion: 'N' });
+  });
+  it("debería avanzar correctamente con la cadena", () => {
+    const cadena = "5,5/1,2 E/AAAA"; 
+    const comandos=mostrar_comandos(cadena);
+    const posicionInicial = mostrar_posiIni(cadena);
+    const posicionFinal = ejecutarComandos(comandos, posicionInicial);
+    expect(posicionFinal).toEqual({ x: 5, y: 2, orientacion: 'E' });
+  });
 });
 
