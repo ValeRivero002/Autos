@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas } from "./autitos.js";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena } from "./autitos.js";
 
 describe("Mostrar", () => {
   /*it("deberia mostrar posicion inicial x, y, orientacion", () => {
@@ -68,6 +68,16 @@ describe("Mostrar", () => {
     const resultado = validarCoordenadas(coordenadas);
     expect(resultado).toBe(false);
   });
+  it("debería devolver true si la cadena tiene 2 slashes", () => {
+    const cadena = "5,5/1,2N/IAIAIAIAA";
+    const resultado = validarFormatoCadena(cadena);
+    expect(resultado).toBe(true);
+  });
 
+  it("debería devolver false si la cadena no tiene 2 slashes", () => {
+    const cadena1 = "5,5/1,2N";
+    const resultado1 = validarFormatoCadena(cadena1);
+    expect(resultado1).toBe(false);
+  });
 });
 

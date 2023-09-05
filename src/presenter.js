@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas } from "./autitos";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena } from "./autitos";
 
 const first = document.querySelector("#primer-numero");
 const form = document.querySelector("#comandos-form");
@@ -13,23 +13,31 @@ form.addEventListener("submit", (event) => {
   const resultado = mostrar_posiIni(cadenaEntrada);
   const resultado3 = validarCoordenadas(cadenaEntrada);
   const resultado2 = mostrar_comandos(cadenaEntrada);
-  if (resultado) {
-    div.innerHTML = `<p>Posicion Inicial : ${resultado.x},${resultado.y} ${resultado.orientacion}</p>`;
-
-  } else {
-    div.innerHTML = "<p>Formato de entrada de la Posicion Inicial incorrecto o orientación inválida.</p>";
+  const resultado4 = validarFormatoCadena(cadenaEntrada);
+  if(resultado4!=false)
+  {
+    if (resultado) {
+      div.innerHTML = `<p>Posicion Inicial : ${resultado.x},${resultado.y} ${resultado.orientacion}</p>`;
+  
+    } else {
+      div.innerHTML = "<p>Formato de entrada de la Posicion Inicial incorrecto o orientación inválida.</p>";
+    }
+    if (resultado2) {
+      div2.innerHTML = "<p>Comandos: "+ mostrar_comandos(cadenaEntrada)+"</p>";
+  
+    } else {
+      div2.innerHTML = "<p>Formato de entrada de los Comandos incorrecto o orientación inválida.</p>";
+    }
+    if (resultado3!=false) {
+      div3.innerHTML = "<p></p>";
+  
+    } else {
+      div3.innerHTML = "<p>Formato de entrada de la Superficie incorrecto o orientación inválida.</p>";
+    }
   }
-  if (resultado2) {
-    div2.innerHTML = "<p>Comandos: "+ mostrar_comandos(cadenaEntrada)+"</p>";
-
-  } else {
-    div2.innerHTML = "<p>Formato de entrada de los Comandos incorrecto o orientación inválida.</p>";
+  else{
+    div3.innerHTML = "<p>Formato de entrada de la Cadena incorrecto o orientación inválida.</p>";
   }
-  if (resultado3!=false) {
-    div3.innerHTML = "<p></p>";
 
-  } else {
-    div3.innerHTML = "<p>Formato de entrada de la Superficie incorrecto o orientación inválida.</p>";
-  }
   
 });

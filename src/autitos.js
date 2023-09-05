@@ -49,3 +49,14 @@ export function validarCoordenadas(coordenadas) {
   }
   return false;
 }
+export function validarFormatoCadena(cadena) {
+  const slashCount = cadena.split("/").length - 1; 
+
+  if(slashCount == 2)
+  {
+    return true;
+  }
+  else{
+    return false;
+  }
+}
