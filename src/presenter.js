@@ -16,9 +16,12 @@ form.addEventListener("submit", (event) => {
   const Comandos = mostrar_comandos(cadenaEntrada);
   const Validar_Cadenaa = validarFormatoCadena(cadenaEntrada);
   const superficie=CoordenadasSuperficie(cadenaEntrada);
-  const posicionFinal= ejecutarComandos(Comandos,Posi_Final,superficie);
-  if(Validar_Cadenaa!=false)
+
+  if(Validar_Cadenaa==false)
   {
+
+    div3.innerHTML = "<p>Formato de entrada de la Cadena incorrecto o orientación inválida.</p>";
+  }
     if (Posi_Final) {
       div.innerHTML = `<p>Posicion Inicial : ${Posi_Final.x},${Posi_Final.y} ${Posi_Final.orientacion}</p>`;
   
@@ -37,11 +40,10 @@ form.addEventListener("submit", (event) => {
     } else {
       div3.innerHTML = "<p>Formato de entrada de la Superficie incorrecto o orientación inválida.</p>";
     }
+    const posicionFinal= ejecutarComandos(Comandos,Posi_Final,superficie);
     div4.innerHTML = `<p>Posicion Final : ${posicionFinal.x},${posicionFinal.y} ${posicionFinal.orientacion}</p>`;
-  }
-  else{
-    div3.innerHTML = "<p>Formato de entrada de la Cadena incorrecto o orientación inválida.</p>";
-  }
+  
+ 
   
   
 });
