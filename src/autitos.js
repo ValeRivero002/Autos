@@ -4,13 +4,16 @@ export function mostrar_posiIni(cadena) {
   if (partes.length >= 2) {
     const coordenadas = partes[1].split(" ");
     
-    if (coordenadas.length === 2) {
-      const xy = coordenadas[0].split(","); // Dividir las coordenadas por coma
+    if (coordenadas.length == 2) {
+      const xy = coordenadas[0].split(","); 
       const x = parseInt(xy[0]);
       const y = parseInt(xy[1]);
       const orientacion = coordenadas[1];
-      
-      return { x, y,orientacion };
+
+      if (['N', 'S', 'E', 'O'].includes(orientacion)) {
+        return { x, y,orientacion };
+      }
+     
     }
   }
   
@@ -25,7 +28,12 @@ export function mostrar_comandos(cadena)
   if (indiceUltimaBarra !== -1) {
     const comandos = cadena.slice(indiceUltimaBarra + 1);
 
-    return comandos;
+    if (/^[IAD]*$/.test(comandos)) {
+      return comandos;
+    }
+    else {
+      return null;
+   }
 
 
   } else {

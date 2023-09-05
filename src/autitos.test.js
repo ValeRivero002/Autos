@@ -17,7 +17,7 @@ describe("Mostrar", () => {
   });
 
   it("debería devolver las coordenadas y la orientación correcta", () => {
-    const resultado = mostrar_posiIni("3,2 N");
+    const resultado = mostrar_posiIni("2,2/3,2 N/IAIAIA");
     expect(resultado).toEqual({ x: 3, y: 2, orientacion: "N" });
   });
   it("debería extraer los comandos a partir de la última barra diagonal", () => {
@@ -26,8 +26,20 @@ describe("Mostrar", () => {
     expect(comandosExtraidos).toBe("IAIAIAIAA");
   });
   it("debería devolver las coordenadas y la orientación correcta ingresando cadena completa", () => {
-    const resultado = mostrar_posiIni("2,2/3,2 N/IAIAIA");
-    expect(resultado).toEqual({"orientacion": "N", x: 3, y: 2 });
+    const resultado = mostrar_posiIni('2,2/3,2 N/IAIAIA');
+    expect(resultado).toEqual({ x: 3, y: 2,"orientacion": "N" });
   });
-
+ 
+  it("debería devolver los comandos si son válidos", () => {
+    const cadena = "2,2/3,2 N/IAIAIA";
+    const resultado = mostrar_comandos(cadena);
+    expect(resultado).toEqual("IAIAIA");
+  });
+  it("debería devolver los comandos son invalidos", () => {
+    
+    const cadena = "2,2/3,2 N/IAIAIF";
+    const resultado = mostrar_comandos(cadena);
+    expect(resultado).toEqual(null);
+  });
 });
+

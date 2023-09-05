@@ -10,12 +10,18 @@ form.addEventListener("submit", (event) => {
   const cadenaEntrada = first.value.trim();
 
   const resultado = mostrar_posiIni(cadenaEntrada);
-
+  const resultado2 = mostrar_comandos(cadenaEntrada);
   if (resultado) {
     div.innerHTML = `<p>Posicion Inicial : ${resultado.x},${resultado.y} ${resultado.orientacion}</p>`;
 
   } else {
-    div.innerHTML = "<p>Formato de entrada incorrecto o orientación inválida.</p>";
+    div.innerHTML = "<p>Formato de entrada de la Posicion Inicial incorrecto o orientación inválida.</p>";
   }
-  div2.innerHTML = "<p>Comandos: "+ mostrar_comandos(cadenaEntrada)+"</p>";
+  if (resultado2) {
+    div2.innerHTML = "<p>Comandos: "+ mostrar_comandos(cadenaEntrada)+"</p>";
+
+  } else {
+    div.innerHTML = "<p>Formato de entrada de los Comandos incorrecto o orientación inválida.</p>";
+  }
+  
 });
