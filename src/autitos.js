@@ -49,6 +49,32 @@ export function validarCoordenadas(coordenadas) {
   }
   return false;
 }
+export function CoordenadasSuperficie(cadenaComandos) {
+ 
+  const partes = cadenaComandos.split("/");
+
+  if (partes.length >= 1) {
+ 
+    const coordenadasSuperficie = partes[0];
+
+   
+    const [x, y] = coordenadasSuperficie.split(",");
+
+    if (x && y) {
+      
+      const dimensionX = parseInt(x);
+      const dimensionY = parseInt(y);
+
+     
+        return { dimensionX, dimensionY };
+      }
+    }
+    return null;
+  }
+
+
+ 
+
 export function validarFormatoCadena(cadena) {
   const slashCount = cadena.split("/").length - 1; 
 
@@ -60,16 +86,18 @@ export function validarFormatoCadena(cadena) {
     return false;
   }
 }
-export function ejecutarComandos(cadenaComandos, posicionInicial) {
+export function ejecutarComandos(cadenaComandos, posicionInicial, dimensionSuperficie) {
   let x = posicionInicial.x;
   let y = posicionInicial.y;
+  let nuevoX = x;
+  let nuevoY = y;
   let orientacion = posicionInicial.orientacion;
 
-  // Recorre cada carácter de la cadena de comandos
-  for (const comando of cadenaComandos) {
+  for (let i = 0; i < cadenaComandos.length; i++) {
+    const comando = cadenaComandos[i];
     switch (comando) {
       case 'I':
-      
+     
         switch (orientacion) {
           case 'N':
             orientacion = 'O';
@@ -85,36 +113,44 @@ export function ejecutarComandos(cadenaComandos, posicionInicial) {
             break;
         }
         break;
-        case 'D':
-          switch (orientacion) {
-            case 'N':
-              orientacion = 'E';
-              break;
-            case 'E':
-              orientacion = 'S';
-              break;
-            case 'S':
-              orientacion = 'O';
-              break;
-            case 'O':
-              orientacion = 'N';
-              break;
-          }
-          break;
-          case 'A':
+      case 'D':
+   
         switch (orientacion) {
           case 'N':
-            y++;
+            orientacion = 'E';
             break;
           case 'E':
-            x++;
+            orientacion = 'S';
             break;
           case 'S':
-            y--;
+            orientacion = 'O';
             break;
           case 'O':
-            x--;
+            orientacion = 'N';
             break;
+        }
+        break;
+      case 'A':   
+
+        switch (orientacion) {
+          case 'N':
+            nuevoY++;
+            break;
+          case 'E':
+            nuevoX++;
+            break;
+          case 'S':
+            nuevoY--;
+            break;
+          case 'O':
+            nuevoX--;
+            break;
+        }
+
+        
+        if ((nuevoX <= dimensionSuperficie.dimensionX) && ( nuevoY <= dimensionSuperficie.dimensionY)) {
+          x = nuevoX;
+          y = nuevoY;
         }
         break;
       default:
@@ -125,3 +161,4 @@ export function ejecutarComandos(cadenaComandos, posicionInicial) {
 
   return { x, y, orientacion };
 }
+

@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos } from "./autitos";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos,CoordenadasSuperficie } from "./autitos";
 
 const first = document.querySelector("#primer-numero");
 const form = document.querySelector("#comandos-form");
@@ -15,7 +15,8 @@ form.addEventListener("submit", (event) => {
   const resultado3 = validarCoordenadas(cadenaEntrada);
   const resultado2 = mostrar_comandos(cadenaEntrada);
   const resultado4 = validarFormatoCadena(cadenaEntrada);
-  const posicionFinal= ejecutarComandos(resultado2,resultado);
+  const superficie=CoordenadasSuperficie(cadenaEntrada);
+  const posicionFinal= ejecutarComandos(resultado2,resultado,superficie);
   if(resultado4!=false)
   {
     if (resultado) {

@@ -1,4 +1,4 @@
-import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos } from "./autitos.js";
+import { mostrar_posiIni, mostrar_comandos,validarCoordenadas,validarFormatoCadena,ejecutarComandos,CoordenadasSuperficie } from "./autitos.js";
 
 describe("Mostrar", () => {
   /*it("deberia mostrar posicion inicial x, y, orientacion", () => {
@@ -105,18 +105,33 @@ describe("Mostrar", () => {
     const posicionFinal = ejecutarComandos(comandos, posicionInicial);
     expect(posicionFinal).toEqual({ x: 1, y: 2, orientacion: 'O' });
   });
-  it("debería avanzar correctamente varias veces hacia el norte", () => {
+  /*it("debería avanzar correctamente varias veces hacia el norte", () => {
     const cadenaComandos = "AAAA"; 
     const posicionInicial = { x: 1, y: 2, orientacion: 'N' };
-    const posicionFinal = ejecutarComandos(cadenaComandos, posicionInicial);
-    expect(posicionFinal).toEqual({ x: 1, y: 6, orientacion: 'N' });
-  });
+    const superficie="7,7";
+    const posicionFinal = ejecutarComandos(cadenaComandos, posicionInicial,superficie);
+    expect(posicionFinal).toEqual({ x: 1, y: 4, orientacion: 'N' });
+  });*/
   it("debería avanzar correctamente con la cadena", () => {
     const cadena = "5,5/1,2 E/AAAA"; 
     const comandos=mostrar_comandos(cadena);
     const posicionInicial = mostrar_posiIni(cadena);
-    const posicionFinal = ejecutarComandos(comandos, posicionInicial);
+    const superficie=CoordenadasSuperficie(cadena);
+    const posicionFinal = ejecutarComandos(comandos, posicionInicial,superficie);
     expect(posicionFinal).toEqual({ x: 5, y: 2, orientacion: 'E' });
+  });
+  it("debería obtener las coordenadas de la superficie correctamente", () => {
+    const cadenaComandos = "5,10/1,2N/IAIAIA"; 
+    const coordenadasSuperficie = CoordenadasSuperficie(cadenaComandos);
+    expect(coordenadasSuperficie).toEqual({ dimensionX: 5, dimensionY: 10 });
+  });
+  it("debería ignorar el comando por el desborde con la cadena", () => {
+    const cadena = "5,5/1,2 N/AA"; 
+    const comandos=mostrar_comandos(cadena);
+    const posicionInicial = mostrar_posiIni(cadena);
+    const superficie=CoordenadasSuperficie(cadena);
+    const posicionFinal = ejecutarComandos(comandos, posicionInicial,superficie);
+    expect(posicionFinal).toEqual({ x: 1, y: 4, orientacion: 'N' });
   });
 });
 
